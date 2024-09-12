@@ -1,0 +1,80 @@
+:root {
+  /* Colores tema claro */
+  --fondo-claro: #ffffff;
+  --fondo-input-claro: #f0f0f0;
+  --icono-claro: #00bcd4;
+  --textos-claro: #000000;
+
+  /* Colores tema oscuro */
+  --fondo-oscuro: #000000;
+  --fondo-input-oscuro: #333333;
+  --icono-oscuro: #00bcd4;
+  --textos-oscuro: #ffffff;
+}
+
+body.light-theme {
+  --fondo: var(--fondo-claro);
+  --fondo-input: var(--fondo-input-claro);
+  --icono: var(--icono-claro);
+  --textos: var(--textos-claro);
+}
+
+body.dark-theme {
+  --fondo: var(--fondo-oscuro);
+  --fondo-input: var(--fondo-input-oscuro);
+  --icono: var(--icono-oscuro);
+  --textos: var(--textos-oscuro);
+}
+
+ion-content {
+  background-color: var(--fondo);
+}
+
+.contenedor {
+  background-color: var(--fondo);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 15px;
+  min-height: 100vh;
+
+  ion-icon {
+    font-size: 10rem;
+    color: var(--icono);
+  }
+
+  input, button {
+    width: 90%;
+    height: 2.5rem;
+    outline: none;
+    border: none;
+    border-radius: 1.25rem;
+    text-align: center;
+    font-size: 1.1rem;
+  }
+
+  input {
+    background-color: var(--fondo-input);
+  }
+
+  button {
+    background-color: var(--icono);
+  }
+
+  h1, p {
+    color: var(--textos);
+  }
+}
+
+#tema {
+  color: var(--icono);
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  font-size: 1.5rem;
+}
+
+.contenedor, h1, p {
+  transition: background-color .5s ease, color .5s ease;
+}
