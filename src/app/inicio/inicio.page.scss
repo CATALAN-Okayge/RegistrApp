@@ -35,16 +35,19 @@ ion-header {
 }
 
 .qr-button {
-  
-  color: var(--textos); 
-  margin-top: 1em;
-  border-radius: 1.25rem;
+  --background: #007bff; /* Azul principal */
+  --background-hover: #0056b3; /* Azul más oscuro al pasar el ratón */
+  --border-radius: 8px;
+  margin-top: 10px;
+  animation: pulse 1.5s infinite; /* Agrega animación de pulso */
 }
 
 .qr-image {
-  margin-top: 20px;
-  width: 100%;
-  max-width: 250px;
+  display: block;
+  margin: 20px auto; /* Centrar horizontalmente */
+  width: 200px;
+  height: auto;
+  border-radius: 8px;
 }
 
 @keyframes fadeIn {
@@ -56,18 +59,21 @@ ion-header {
   }
 }
 
+/* Animación de pulso */
 @keyframes pulse {
   0% {
     transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.7);
   }
-  50% {
+  70% {
     transform: scale(1.05);
+    box-shadow: 0 0 20px 10px rgba(0, 123, 255, 0);
   }
   100% {
     transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(0, 123, 255, 0);
   }
 }
-
 
 
 ion-icon {

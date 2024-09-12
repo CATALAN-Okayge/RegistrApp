@@ -7,10 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InicioPage implements OnInit {
   qrCodeImage: string | null = null;
-  icono = 'oscuro'; // Define el icono inicial como oscuro
+  icono = 'oscuro'; 
 
   ngOnInit() {
-    // Aplica el tema oscuro al iniciar
+    
     document.body.classList.add('dark-theme');
   }
 
