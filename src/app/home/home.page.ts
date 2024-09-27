@@ -8,8 +8,8 @@ import { AnimationController } from '@ionic/angular';
 })
 export class HomePage implements OnInit {
 
-  icono = 'oscuro'; 
-
+  icono = 'night_mode'; 
+   
   constructor(private anim: AnimationController) {}
 
   ngOnInit() {
@@ -41,20 +41,20 @@ export class HomePage implements OnInit {
   }
 
   cambiarTema() {
-    if (this.icono === 'oscuro') {
+    if (this.icono === 'night_mode') {
       
       document.documentElement.style.setProperty('--fondo', '#ffffff');
       document.documentElement.style.setProperty('--fondo-input', '#f0f0f0');
       document.documentElement.style.setProperty('--icono', '#00bcd4');
       document.documentElement.style.setProperty('--textos', '#000000');
-      this.icono = 'claro';
+      this.icono = 'light_mode';
     } else {
       
       document.documentElement.style.setProperty('--fondo', '#000000');
       document.documentElement.style.setProperty('--fondo-input', '#333333');
       document.documentElement.style.setProperty('--icono', '#00bcd4');
       document.documentElement.style.setProperty('--textos', '#ffffff');
-      this.icono = 'oscuro';
+      this.icono = 'night_mode';
     }
   }
 }

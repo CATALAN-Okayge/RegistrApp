@@ -1,11 +1,11 @@
 :root {
-  /* Colores tema claro */
+  
   --fondo-claro: #ffffff;
-  --fondo-input-claro: #f0f0f0;
+  --fondo-input-claro: #808080;
   --icono-claro: #00bcd4;
   --textos-claro: #000000;
 
-  /* Colores tema oscuro */
+  
   --fondo-oscuro: #000000;
   --fondo-input-oscuro: #333333;
   --icono-oscuro: #00bcd4;
@@ -73,6 +73,14 @@ ion-content {
   right: 20px;
   top: 20px;
   font-size: 1.5rem;
+}
+
+#imagen-pequena {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 60px; 
+  height: auto; 
 }
 
 .contenedor, h1, p {
