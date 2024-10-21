@@ -1,88 +1,97 @@
-:root {
-  
-  --fondo-claro: #ffffff;
-  --fondo-input-claro: #808080;
-  --icono-claro: #00bcd4;
-  --textos-claro: #000000;
-
-  
-  --fondo-oscuro: #000000;
-  --fondo-input-oscuro: #333333;
-  --icono-oscuro: #00bcd4;
-  --textos-oscuro: #ffffff;
-}
-
-body.light-theme {
-  --fondo: var(--fondo-claro);
-  --fondo-input: var(--fondo-input-claro);
-  --icono: var(--icono-claro);
-  --textos: var(--textos-claro);
-}
-
-body.dark-theme {
-  --fondo: var(--fondo-oscuro);
-  --fondo-input: var(--fondo-input-oscuro);
-  --icono: var(--icono-oscuro);
-  --textos: var(--textos-oscuro);
-}
-
+/* Fondo general */
 ion-content {
-  background-color: var(--fondo);
-}
-
-.contenedor {
-  background-color: var(--fondo);
+  --background: linear-gradient(to bottom, #00695c, #004d40); /* Fondo degradado */
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  row-gap: 15px;
-  min-height: 100vh;
-
-  ion-icon {
-    font-size: 10rem;
-    color: var(--icono);
-  }
-
-  input, button {
-    width: 90%;
-    height: 2.5rem;
-    outline: none;
-    border: none;
-    border-radius: 1.25rem;
-    text-align: center;
-    font-size: 1.1rem;
-  }
-
-  input {
-    background-color: var(--fondo-input);
-  }
-
-  button {
-    background-color: var(--icono);
-  }
-
-  h1, p {
-    color: var(--textos);
-  }
+  height: 100%;
+  padding: 20px;
 }
 
+/* Contenedor del login */
+.contenedor {
+  background-color: #ffffff; /* Fondo blanco para contraste */
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra suave */
+  padding: 40px;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  animation: fadeIn 1s ease-out; /* Animación de entrada */
+}
+
+/* Estilo del logo */
+#logo {
+  width: 150px;
+  margin-bottom: 20px;
+}
+
+/* Estilo de los input fields */
+ion-item {
+  --background: transparent; /* Sin fondo en los input */
+  margin-bottom: 20px;
+}
+
+ion-input {
+  --background: #f0f0f0; /* Fondo de los campos de texto */
+  border-radius: 5px;
+  padding: 10px;
+  --color: #000000; /* Color del texto */
+  font-size: 16px;
+  border: 1px solid transparent;
+  transition: border-color 0.3s ease-in-out;
+}
+
+ion-input:focus {
+  border-color: #00bcd4; /* Color del borde al hacer foco */
+}
+
+/* Estilo de los botones */
+ion-button {
+  --background: #00bcd4; /* Color de fondo del botón */
+  --background-activated: #008ba3; /* Fondo cuando el botón está presionado */
+  --border-radius: 25px;
+  --color: #ffffff;
+  margin-top: 15px;
+  padding: 10px;
+  font-size: 18px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+ion-button:hover {
+  --background: #008ba3; /* Efecto hover */
+}
+
+ion-button.tertiary {
+  --background: #ffc107; /* Color diferente para el botón de registro */
+}
+
+ion-button.tertiary:hover {
+  --background: #ffb300; /* Hover del botón de registro */
+}
+
+/* Icono de cambio de tema */
 #tema {
-  color: var(--icono);
   position: absolute;
+  top: 20px;
   right: 20px;
-  top: 20px;
-  font-size: 1.5rem;
+  font-size: 28px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
 }
 
-#imagen-pequena {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  width: 60px; 
-  height: auto; 
+#tema:hover {
+  transform: rotate(20deg); /* Pequeña rotación al pasar el mouse */
 }
 
-.contenedor, h1, p {
-  transition: background-color .5s ease, color .5s ease;
+/* Animaciones */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

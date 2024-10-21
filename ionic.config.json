@@ -1,8 +1,8 @@
 {
-  "name": "ejemplo",
-  "integrations": {
-    "capacitor": {},
-    "cordova": {}
-  },
-  "type": "angular"
+  "name": "Registrapp",
+  "integrations": {},
+  "type": "angular",
+  "server": {
+    "port": 8200
+  }
 }

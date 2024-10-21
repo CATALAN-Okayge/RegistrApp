@@ -25,6 +25,27 @@ export class InicioPage implements OnInit {
     }, 500); 
   }
 
+  // Aquí simulas la función que maneja el escaneo del QR
+  escanearQR(codigoQR: string) {
+    // Aquí puedes agregar lógica para leer el código QR (falta implementación)
+    this.registrarAsistencia(codigoQR);
+  }
+
+  // Función para registrar asistencia en LocalStorage
+  registrarAsistencia(qrData: string) {
+    const asistencia = {
+      codigo: qrData,
+      fecha: new Date().toLocaleString(),
+    };
+
+    // Guardar asistencia en LocalStorage
+    let registros = JSON.parse(localStorage.getItem('asistencias') || '[]');
+    registros.push(asistencia);
+    localStorage.setItem('asistencias', JSON.stringify(registros));
+
+    console.log("Asistencia registrada: ", asistencia);
+  }
+
   cambiarTema() {
     if (this.icono === 'oscuro') {
       // Cambia los valores para el tema claro
