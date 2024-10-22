@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { AnimationController } from '@ionic/angular';
 import { AlertController} from '@ionic/angular'; // Importa Router
 import { Router } from '@angular/router';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { LoadingController } from '@ionic/angular';
+
 
 
 @Component({
@@ -12,11 +15,13 @@ import { Router } from '@angular/router';
 export class HomePage implements OnInit {
 
   icono = 'night_mode'; 
-  nombreUsuario: string = ''; // Nombre de usuario para login/registro
-  contrasena: string = '';    // Contraseña para login/registro
+    nombreUsuario: string = ''; // Nombre de usuario para login/registro
+    contrasena: string = '';    // Contraseña para login/registro
+    
+    
 
 
-  constructor(private alertController: AlertController, private router: Router, private anim: AnimationController) {}
+  constructor(private alertController: AlertController, private router: Router, private anim: AnimationController,private http: HttpClient,private loadingCtrl: LoadingController) {}
 
 
 
@@ -45,19 +50,19 @@ export class HomePage implements OnInit {
   }
 
   // Método para iniciar sesión
-iniciarSesion() {
-  const storedUsername = localStorage.getItem('nombreUsuario');
-  const storedPassword = localStorage.getItem('contrasena');
+  iniciarSesion() {
+    const storedUsername = localStorage.getItem('nombreUsuario');
+    const storedPassword = localStorage.getItem('contrasena');
 
-  // Validamos si el nombre de usuario y la contraseña coinciden con los datos guardados
-  if (this.nombreUsuario === storedUsername && this.contrasena === storedPassword) {
-    this.mostrarAlerta('Inicio de Sesión', 'Has iniciado sesión correctamente.').then(() => {
-      this.router.navigate(['/inicio']); // Redirige a la página 'inicio'
-    });
-  } else {
-    this.mostrarAlerta('Error', 'Nombre de usuario o contraseña incorrectos.');
+    // Validamos si el nombre de usuario y la contraseña coinciden con los datos guardados
+    if (this.nombreUsuario === storedUsername && this.contrasena === storedPassword) {
+      this.mostrarAlerta('Inicio de Sesión', 'Has iniciado sesión correctamente.').then(() => {
+        this.router.navigate(['/inicio']); // Redirige a la página 'inicio'
+      });
+    } else {
+      this.mostrarAlerta('Error', 'Nombre de usuario o contraseña incorrectos.');
+    }
   }
-}
 
   // Método para mostrar una alerta
   async mostrarAlerta(header: string, message: string) {
@@ -69,6 +74,34 @@ iniciarSesion() {
 
     await alert.present();
   }
+
+  
+
+  // Método para recuperar contraseña
+  recuperarContrasena() {
+    const apiUrl = 'https://myths.cl/api/reset_password.php'; // URL de la API
+    const data = {
+      username: this.nombreUsuario // Asegúrate de que este campo sea correcto
+    };
+  
+    this.http.post(apiUrl, data).subscribe(
+      (response: any) => { // Cambia 'any' por el tipo que esperas si es necesario
+        // Aquí se espera que la API devuelva un mensaje
+        if (response.success) { // Asegúrate de que 'success' sea la propiedad correcta
+          this.mostrarAlerta('Éxito', response.message || 'Se ha enviado un correo para recuperar la contraseña.');
+        } else {
+          this.mostrarAlerta('Error', response.message || 'Hubo un problema al intentar recuperar la contraseña.');
+        }
+      },
+      (error) => {
+        // Manejar el error aquí
+        this.mostrarAlerta('Error', 'Hubo un problema al intentar recuperar la contraseña. Por favor, inténtalo de nuevo.');
+      }
+    );
+  }
+
+
+
 
 
   animarError(index: number) {
