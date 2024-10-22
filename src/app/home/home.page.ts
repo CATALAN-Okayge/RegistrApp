@@ -17,7 +17,7 @@ export class HomePage implements OnInit {
   icono = 'night_mode'; 
     nombreUsuario: string = ''; // Nombre de usuario para login/registro
     contrasena: string = '';    // Contraseña para login/registro
-    
+    email: string = ''; // Email del usuario para recuperar la contraseña
     
 
 
@@ -80,10 +80,16 @@ export class HomePage implements OnInit {
   // Método para recuperar contraseña
   recuperarContrasena() {
     const apiUrl = 'https://myths.cl/api/reset_password.php'; // URL de la API
+    const storedUsername = localStorage.getItem('nombreUsuario');
+    const storedEmail = this.email; // Aquí debes asegurarte de que el email se ingrese correctamente
+
     const data = {
-      username: this.nombreUsuario // Asegúrate de que este campo sea correcto
+      nombre: storedUsername, // Nombre de usuario
+      app: 'TuAppName', // Cambia esto por el nombre de tu aplicación
+      clave: this.contrasena, // Puedes generar una nueva clave o usar la actual
+      email: storedEmail // Email del usuario
     };
-  
+
     this.http.post(apiUrl, data).subscribe(
       (response: any) => { // Cambia 'any' por el tipo que esperas si es necesario
         // Aquí se espera que la API devuelva un mensaje

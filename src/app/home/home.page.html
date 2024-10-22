@@ -6,6 +6,7 @@
     <h1>Iniciar sesión</h1>
     
     <ion-input [(ngModel)]="nombreUsuario" placeholder="Nombre de usuario"></ion-input>
+    <ion-input [(ngModel)]="email" type="email" placeholder="Correo electrónico"></ion-input>
     <ion-input [(ngModel)]="contrasena" type="password" placeholder="Contraseña"></ion-input>
 
     <ion-button expand="block" color="secondary" (click)="iniciarSesion()">Iniciar Sesión</ion-button>
