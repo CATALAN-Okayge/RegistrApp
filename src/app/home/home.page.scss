@@ -1,6 +1,6 @@
 /* Fondo general */
 ion-content {
-  --background: linear-gradient(to bottom, #00695c, #004d40); /* Fondo degradado */
+  --background: #1c1c1c; /* Fondo negro */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -10,7 +10,7 @@ ion-content {
 
 /* Contenedor del login */
 .contenedor {
-  background-color: #ffffff; /* Fondo blanco para contraste */
+  background-color: #1c1c1c; /* Fondo negro para el contenedor */
   border-radius: 15px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra suave */
   padding: 40px;
@@ -18,13 +18,13 @@ ion-content {
   max-width: 400px;
   text-align: center;
   animation: fadeIn 1s ease-out; /* Animación de entrada */
+  ion-icon{
+    font-size: 8rem;
+    color: #00bcd4;
+ }
 }
 
-/* Estilo del logo */
-#logo {
-  width: 150px;
-  margin-bottom: 20px;
-}
+
 
 /* Estilo de los input fields */
 ion-item {
@@ -33,10 +33,10 @@ ion-item {
 }
 
 ion-input {
-  --background: #f0f0f0; /* Fondo de los campos de texto */
-  border-radius: 5px;
+  --background: #2c2c2c; /* Fondo plomo oscuro para los campos de texto */
+  border-radius: 10px; /* Bordes redondeados */
   padding: 10px;
-  --color: #000000; /* Color del texto */
+  --color: #ffffff; /* Color del texto en los inputs */
   font-size: 16px;
   border: 1px solid transparent;
   transition: border-color 0.3s ease-in-out;
@@ -51,10 +51,10 @@ ion-button {
   --background: #00bcd4; /* Color de fondo del botón */
   --background-activated: #008ba3; /* Fondo cuando el botón está presionado */
   --border-radius: 25px;
-  --color: #ffffff;
+  --color: #ffffff; /* Color del texto de los botones */
   margin-top: 15px;
-  padding: 10px;
-  font-size: 18px;
+  padding: 8px; /* Botones un poco más pequeños */
+  font-size: 16px; /* Tamaño de fuente ajustado */
   transition: background-color 0.3s ease-in-out;
 }
 
@@ -70,20 +70,6 @@ ion-button.tertiary:hover {
   --background: #ffb300; /* Hover del botón de registro */
 }
 
-/* Icono de cambio de tema */
-#tema {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  font-size: 28px;
-  cursor: pointer;
-  transition: transform 0.3s ease-in-out;
-}
-
-#tema:hover {
-  transform: rotate(20deg); /* Pequeña rotación al pasar el mouse */
-}
-
 /* Animaciones */
 @keyframes fadeIn {
   from {
@@ -95,3 +81,13 @@ ion-button.tertiary:hover {
     transform: translateY(0);
   }
 }
+
+/* Cambios adicionales para el texto */
+h1 {
+  color: #ffffff; /* Color del texto del título */
+}
+
+p {
+  color: #ffffff; /* Color del texto de los párrafos, si hay */
+}
+
