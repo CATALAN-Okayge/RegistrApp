@@ -24,18 +24,15 @@ export class InicioPage implements OnInit {
 
   async escanearQR() {
     try {
-      // Solicitar permisos de la cámara
       await BarcodeScanner.checkPermission({ force: true });
 
-      // Iniciar el escáner
       const result = await BarcodeScanner.startScan();
 
-      // Verificar si se escaneó un código
       if (result.hasContent) {
         const codigoQR = result.content;
         this.registrarAsistencia(codigoQR);
 
-        // Mostrar mensaje de éxito
+      
         this.mostrarMensajeExito();
       } else {
         console.log('No se escaneó ningún código.');
@@ -45,23 +42,23 @@ export class InicioPage implements OnInit {
     }
   }
 
-  // Función para mostrar un mensaje de éxito con botón OK
+
   async mostrarMensajeExito() {
     const toast = await this.toastController.create({
       message: 'Escaneo exitoso',
       buttons: [
         {
           text: 'OK',
-          role: 'cancel' // El botón cierra el toast cuando se presiona
+          role: 'cancel' 
         }
       ],
-      position: 'bottom' // Posición del mensaje
+      position: 'bottom' 
     });
     await toast.present();
   }
 
   registrarAsistencia(qrData: string) {
-    const nombreUsuario = localStorage.getItem('nombreUsuario') || 'Desconocido'; // Obtener el nombre del localStorage
+    const nombreUsuario = localStorage.getItem('nombreUsuario') || 'Desconocido'; 
     const asistencia = {
       codigo: qrData,
       usuario: nombreUsuario,
@@ -76,7 +73,6 @@ export class InicioPage implements OnInit {
   }
 
   cambiarTema() {
-    // Cambiar entre temas claro y oscuro
     if (this.icono === 'oscuro') {
       document.documentElement.style.setProperty('--fondo', '#ffffff');
       document.documentElement.style.setProperty('--fondo-input', '#f0f0f0');

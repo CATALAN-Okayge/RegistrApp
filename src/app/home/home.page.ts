@@ -77,7 +77,7 @@ export class HomePage implements OnInit {
 
   
 
-  // Método para recuperar contraseña
+  
   recuperarContrasena() {
     const apiUrl = 'https://myths.cl/api/reset_password.php'; 
     const storedUsername = localStorage.getItem('nombreUsuario');
