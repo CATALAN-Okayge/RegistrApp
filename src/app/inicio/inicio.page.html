@@ -6,11 +6,7 @@
       </ion-button>
     </ion-buttons>
     <ion-title>Inicio</ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="cambiarTema()">
-        <ion-icon src="/assets/{{icono}}.svg"></ion-icon>
-      </ion-button>
-    </ion-buttons>
+    
   </ion-toolbar>
 </ion-header>
 
@@ -24,12 +20,16 @@
       </ion-card-header>
       <ion-card-content>
         <p class="description">
-          Haz clic en el botón para generar un código QR para que los estudiantes puedan escanear para registrar su asistencia.
+          Haz clic en el botón para generar un código QR.
         </p>
-        <ion-button expand="block" color="primary" (click)="generarQR()" class="qr-button">Generar Código QR</ion-button>
+        <ion-button expand="block" color="secondary" (click)="generarQR()">Generar Código QR</ion-button>
         <ion-img [src]="qrCodeImage" *ngIf="qrCodeImage" class="qr-image"></ion-img>
       </ion-card-content>
     </ion-card>
   </div>
-</ion-content>
 
+  
+  <div class="escanear-qr-container">
+    <ion-button expand="block" color="tertiary" (click)="escanearQR()">Escanear QR</ion-button>
+  </div>
+</ion-content>

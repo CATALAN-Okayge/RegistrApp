@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AnimationController } from '@ionic/angular';
-import { AlertController} from '@ionic/angular'; // Importa Router
+import { AlertController} from '@ionic/angular'; 
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LoadingController } from '@ionic/angular';
@@ -15,9 +15,9 @@ import { LoadingController } from '@ionic/angular';
 export class HomePage implements OnInit {
 
   icono = 'night_mode'; 
-    nombreUsuario: string = ''; // Nombre de usuario para login/registro
-    contrasena: string = '';    // Contraseña para login/registro
-    email: string = ''; // Email del usuario para recuperar la contraseña
+    nombreUsuario: string = ''; 
+    contrasena: string = '';    
+    email: string = ''; 
     
 
 
@@ -38,7 +38,7 @@ export class HomePage implements OnInit {
       .play();
   }
 
-   // Método para registrar usuario en localStorage
+  
    registrarUsuario() {
     if (this.nombreUsuario && this.contrasena) {
       localStorage.setItem('nombreUsuario', this.nombreUsuario);
@@ -49,22 +49,22 @@ export class HomePage implements OnInit {
     }
   }
 
-  // Método para iniciar sesión
+  
   iniciarSesion() {
     const storedUsername = localStorage.getItem('nombreUsuario');
     const storedPassword = localStorage.getItem('contrasena');
 
-    // Validamos si el nombre de usuario y la contraseña coinciden con los datos guardados
+    
     if (this.nombreUsuario === storedUsername && this.contrasena === storedPassword) {
       this.mostrarAlerta('Inicio de Sesión', 'Has iniciado sesión correctamente.').then(() => {
-        this.router.navigate(['/inicio']); // Redirige a la página 'inicio'
+        this.router.navigate(['/inicio']); 
       });
     } else {
       this.mostrarAlerta('Error', 'Nombre de usuario o contraseña incorrectos.');
     }
   }
 
-  // Método para mostrar una alerta
+ 
   async mostrarAlerta(header: string, message: string) {
     const alert = await this.alertController.create({
       header: header,
@@ -79,28 +79,27 @@ export class HomePage implements OnInit {
 
   // Método para recuperar contraseña
   recuperarContrasena() {
-    const apiUrl = 'https://myths.cl/api/reset_password.php'; // URL de la API
+    const apiUrl = 'https://myths.cl/api/reset_password.php'; 
     const storedUsername = localStorage.getItem('nombreUsuario');
-    const storedEmail = this.email; // Aquí debes asegurarte de que el email se ingrese correctamente
+    const storedEmail = this.email; 
 
     const data = {
-      nombre: storedUsername, // Nombre de usuario
-      app: 'TuAppName', // Cambia esto por el nombre de tu aplicación
-      clave: this.contrasena, // Puedes generar una nueva clave o usar la actual
-      email: storedEmail // Email del usuario
+      nombre: storedUsername, 
+      app: 'RegistrApp', 
+      clave: this.contrasena, 
+      email: storedEmail 
     };
 
     this.http.post(apiUrl, data).subscribe(
-      (response: any) => { // Cambia 'any' por el tipo que esperas si es necesario
-        // Aquí se espera que la API devuelva un mensaje
-        if (response.success) { // Asegúrate de que 'success' sea la propiedad correcta
+      (response: any) => { 
+        if (response.success) { 
           this.mostrarAlerta('Éxito', response.message || 'Se ha enviado un correo para recuperar la contraseña.');
         } else {
           this.mostrarAlerta('Error', response.message || 'Hubo un problema al intentar recuperar la contraseña.');
         }
       },
       (error) => {
-        // Manejar el error aquí
+        
         this.mostrarAlerta('Error', 'Hubo un problema al intentar recuperar la contraseña. Por favor, inténtalo de nuevo.');
       }
     );

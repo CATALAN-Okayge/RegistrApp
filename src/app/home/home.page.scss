@@ -1,6 +1,6 @@
-/* Fondo general */
+
 ion-content {
-  --background: #1c1c1c; /* Fondo negro */
+  background: #1c1c1c; 
   display: flex;
   justify-content: center;
   align-items: center;
@@ -8,16 +8,16 @@ ion-content {
   padding: 20px;
 }
 
-/* Contenedor del login */
+
 .contenedor {
-  background-color: #1c1c1c; /* Fondo negro para el contenedor */
+  background-color: #1c1c1c; 
   border-radius: 15px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra suave */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
   padding: 40px;
   width: 100%;
   max-width: 400px;
   text-align: center;
-  animation: fadeIn 1s ease-out; /* Animación de entrada */
+  animation: fadeIn 1s ease-out; 
   ion-icon{
     font-size: 8rem;
     color: #00bcd4;
@@ -26,51 +26,51 @@ ion-content {
 
 
 
-/* Estilo de los input fields */
+
 ion-item {
-  --background: transparent; /* Sin fondo en los input */
+  --background: transparent; 
   margin-bottom: 20px;
 }
 
 ion-input {
-  --background: #2c2c2c; /* Fondo plomo oscuro para los campos de texto */
-  border-radius: 10px; /* Bordes redondeados */
+  --background: #2c2c2c; 
+  border-radius: 10px; 
   padding: 10px;
-  --color: #ffffff; /* Color del texto en los inputs */
+  --color: #ffffff; 
   font-size: 16px;
   border: 1px solid transparent;
   transition: border-color 0.3s ease-in-out;
 }
 
 ion-input:focus {
-  border-color: #00bcd4; /* Color del borde al hacer foco */
+  border-color: #00bcd4; 
 }
 
-/* Estilo de los botones */
+
 ion-button {
-  --background: #00bcd4; /* Color de fondo del botón */
-  --background-activated: #008ba3; /* Fondo cuando el botón está presionado */
+  --background: #00bcd4; 
+  --background-activated: #008ba3; 
   --border-radius: 25px;
-  --color: #ffffff; /* Color del texto de los botones */
+  --color: #ffffff; 
   margin-top: 15px;
-  padding: 8px; /* Botones un poco más pequeños */
-  font-size: 16px; /* Tamaño de fuente ajustado */
+  padding: 8px; 
+  font-size: 16px; 
   transition: background-color 0.3s ease-in-out;
 }
 
 ion-button:hover {
-  --background: #008ba3; /* Efecto hover */
+  --background: #008ba3; 
 }
 
 ion-button.tertiary {
-  --background: #ffc107; /* Color diferente para el botón de registro */
+  --background: #ffc107; 
 }
 
 ion-button.tertiary:hover {
-  --background: #ffb300; /* Hover del botón de registro */
+  --background: #ffb300; 
 }
 
-/* Animaciones */
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -82,12 +82,12 @@ ion-button.tertiary:hover {
   }
 }
 
-/* Cambios adicionales para el texto */
+
 h1 {
-  color: #ffffff; /* Color del texto del título */
+  color: #ffffff; 
 }
 
 p {
-  color: #ffffff; /* Color del texto de los párrafos, si hay */
+  color: #ffffff; 
 }
 

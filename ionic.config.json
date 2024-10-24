@@ -1,6 +1,8 @@
 {
   "name": "Registrapp",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular",
   "server": {
     "port": 8200
