@@ -6,12 +6,15 @@
     <h1>Iniciar sesión</h1>
     
     <ion-input [(ngModel)]="nombreUsuario" placeholder="Nombre de usuario"></ion-input>
-    <ion-input [(ngModel)]="email" type="email" placeholder="Correo electrónico"></ion-input>
     <ion-input [(ngModel)]="contrasena" type="password" placeholder="Contraseña"></ion-input>
+    <ion-input [(ngModel)]="email" type="email" placeholder="Correo electrónico"></ion-input>
 
     <ion-button expand="block" color="secondary" (click)="iniciarSesion()">Iniciar Sesión</ion-button>
     <ion-button expand="block" color="secondary" (click)="registrarUsuario()">Registrar</ion-button>
-    <ion-button expand="block" color="secondary" (click)="recuperarContrasena()">Recuperar Contraseña</ion-button>
+    <p>
+      <a class="recuperar-contrasena" (click)="recuperarContrasena()">Recuperar contraseña</a>
+    </p>
+    
 
   </div>
 </ion-content>
