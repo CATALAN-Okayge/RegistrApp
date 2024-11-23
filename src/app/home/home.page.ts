@@ -5,8 +5,6 @@ import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LoadingController } from '@ionic/angular';
 
-
-
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -15,18 +13,13 @@ import { LoadingController } from '@ionic/angular';
 export class HomePage implements OnInit {
 
   icono = 'night_mode'; 
-    nombreUsuario: string = ''; 
-    contrasena: string = '';    
-    email: string = ''; 
-    
+  nombreUsuario: string = ''; 
+  contrasena: string = '';    
+  email: string = ''; 
 
-
-  constructor(private alertController: AlertController, private router: Router, private anim: AnimationController,private http: HttpClient,private loadingCtrl: LoadingController) {}
-
-
+  constructor(private alertController: AlertController, private router: Router, private anim: AnimationController, private http: HttpClient, private loadingCtrl: LoadingController) {}
 
   ngOnInit() {
-    
     document.body.classList.add('dark-theme');
 
     this.anim.create()
@@ -38,33 +31,37 @@ export class HomePage implements OnInit {
       .play();
   }
 
-  
-   registrarUsuario() {
+  // Función para registrar usuario
+  registrarUsuario() {
     if (this.nombreUsuario && this.contrasena) {
       localStorage.setItem('nombreUsuario', this.nombreUsuario);
       localStorage.setItem('contrasena', this.contrasena);
+      
+      if (this.email) {
+        localStorage.setItem('email', this.email); // Guardar el email opcional
+      }
+  
       this.mostrarAlerta('Registro Exitoso', 'Te has registrado correctamente.');
     } else {
       this.mostrarAlerta('Error', 'Por favor, completa todos los campos.');
     }
   }
 
-  
+  // Función para iniciar sesión
   iniciarSesion() {
     const storedUsername = localStorage.getItem('nombreUsuario');
     const storedPassword = localStorage.getItem('contrasena');
 
-    
     if (this.nombreUsuario === storedUsername && this.contrasena === storedPassword) {
       this.mostrarAlerta('Inicio de Sesión', 'Has iniciado sesión correctamente.').then(() => {
-        this.router.navigate(['/inicio']); 
+        this.router.navigate(['/inicio']);
       });
     } else {
       this.mostrarAlerta('Error', 'Nombre de usuario o contraseña incorrectos.');
     }
   }
 
- 
+  // Método para mostrar alertas
   async mostrarAlerta(header: string, message: string) {
     const alert = await this.alertController.create({
       header: header,
@@ -75,9 +72,7 @@ export class HomePage implements OnInit {
     await alert.present();
   }
 
-  
-
-  
+  // Función para recuperar contraseña
   recuperarContrasena() {
     const apiUrl = 'https://myths.cl/api/reset_password.php'; 
     const storedUsername = localStorage.getItem('nombreUsuario');
@@ -99,16 +94,12 @@ export class HomePage implements OnInit {
         }
       },
       (error) => {
-        
         this.mostrarAlerta('Error', 'Hubo un problema al intentar recuperar la contraseña. Por favor, inténtalo de nuevo.');
       }
     );
   }
 
-
-
-
-
+  // Función para animar errores en campos
   animarError(index: number) {
     this.anim.create()
       .addElement(document.querySelectorAll("input")[index]!)
@@ -123,10 +114,6 @@ export class HomePage implements OnInit {
       ])
       .play();
   }
-
- 
-
-
-  
 }
+
 

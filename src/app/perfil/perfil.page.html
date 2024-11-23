@@ -1,34 +1,31 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-button routerLink="/home">
-        <ion-icon src="assets/arrow-back.svg" slot="icon-only"></ion-icon>
+      <ion-button routerLink="/inicio">
+        <ion-icon name="arrow-back" slot="icon-only"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>Mi Perfil</ion-title>
+    <ion-title>Perfil</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="perfil-container">
-  <!-- Foto de perfil -->
-  <div class="perfil-header">
-    <ion-avatar class="avatar">
-      <img [src]="fotoUsuario" alt="Foto de perfil" />
-    </ion-avatar>
-    <ion-button expand="block" color="secondary" (click)="cambiarFoto()">Cambiar Foto</ion-button>
+<ion-content>
+  <div class="perfil-container">
+    <div class="perfil-info">
+      <h2>{{ nombreUsuario }}</h2>
+      <p><strong>Email:</strong> {{ email }}</p>
+    </div>
+
+    <div class="perfil-historial">
+      <h3>Historial de Registro de Asistencia</h3>
+      <ion-list>
+        <ion-item *ngFor="let registro of historialAsistencias">
+          <div>
+            <p><strong>Código:</strong> {{ registro.codigo }}</p>
+            <p><strong>Fecha:</strong> {{ registro.fecha }}</p>
+          </div>
+        </ion-item>
+      </ion-list>
+    </div>
   </div>
-
-  <!-- Información del usuario -->
-  <ion-item>
-    <ion-label position="stacked">Nombre de usuario</ion-label>
-    <ion-text>{{ nombreUsuario }}</ion-text>
-  </ion-item>
-
-  <ion-item>
-    <ion-label position="stacked">Correo electrónico</ion-label>
-    <ion-text>{{ correoUsuario }}</ion-text>
-  </ion-item>
-
-  <!-- Botón para editar perfil -->
-  <ion-button expand="block" color="primary" routerLink="/editar-perfil">Editar Perfil</ion-button>
 </ion-content>

@@ -7,7 +7,7 @@
     
     <ion-input [(ngModel)]="nombreUsuario" placeholder="Nombre de usuario"></ion-input>
     <ion-input [(ngModel)]="contrasena" type="password" placeholder="Contraseña"></ion-input>
-    <ion-input [(ngModel)]="email" type="email" placeholder="Correo electrónico"></ion-input>
+    <ion-input placeholder="Email (opcional)" [(ngModel)]="email"></ion-input>
 
     <ion-button expand="block" color="secondary" (click)="iniciarSesion()">Iniciar Sesión</ion-button>
     <ion-button expand="block" color="secondary" (click)="registrarUsuario()">Registrar</ion-button>

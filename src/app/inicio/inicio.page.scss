@@ -88,3 +88,11 @@ ion-icon {
   font-size: 1.5rem;
   color: var(--icono);
 }
+
+ion-toolbar ion-button {
+  --color: #ffffff; /* Color blanco para el ícono */
+}
+
+ion-toolbar ion-icon {
+  font-size: 24px; /* Tamaño del ícono */
+}
