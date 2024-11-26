@@ -14,7 +14,7 @@ export class InicioPage implements OnInit {
   constructor(private toastController: ToastController) {}
 
   ngOnInit() {
-    document.body.classList.add('dark-theme');
+    
   }
 
   generarQR() {

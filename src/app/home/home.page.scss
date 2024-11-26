@@ -1,87 +1,102 @@
+/* Configuración general de la página */
 ion-content {
-  background: #1c1c1c; 
+  background-color: #121212; /* Fondo oscuro para una estética moderna */
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
-  padding: 0; /* Eliminar cualquier relleno */
-  margin: 0; /* Eliminar márgenes */
+  min-height: 100vh;
+  padding: 0;
 }
 
 .contenedor {
-  background-color: #1c1c1c; 
-  border-radius: 15px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
+  background-color: #1f1f1f; /* Fondo gris oscuro */
+  border-radius: 20px; /* Bordes redondeados */
   padding: 40px;
-  width: 100%;
-  max-width: 400px;
+  max-width: 420px; /* Máxima anchura para evitar sobrecargar en pantallas grandes */
+  width: 100%; /* Ancho completo en pantallas pequeñas */
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2); /* Sombra sutil */
   text-align: center;
-  animation: fadeIn 1s ease-out; 
+  animation: fadeIn 0.6s ease-out; /* Efecto de entrada */
+  
+  /* Espaciado y estilo para los elementos dentro */
   ion-icon {
-    font-size: 8rem;
-    color: #00bcd4;
+    font-size: 5rem; /* Tamaño del logo */
+    color: #00bcd4; /* Color vibrante para destacar */
+    margin-bottom: 20px;
+  }
+
+  h1 {
+    font-size: 1.8rem; /* Título grande */
+    color: #ffffff;
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
+
+  /* Estilo para los campos de entrada */
+  ion-input {
+    --background: #333333; /* Fondo oscuro para el input */
+    --color: #ffffff; /* Texto blanco */
+    --placeholder-color: #999999; /* Color del texto de placeholder */
+    --border-radius: 25px; /* Bordes redondeados */
+    font-size: 1rem;
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 12px 15px;
+    transition: all 0.3s ease-in-out;
+    
+    &:focus {
+      --background: #2a2a2a; /* Fondo más oscuro cuando se enfoca */
+      --border-color: #00bcd4; /* Resaltado de bordes */
+    }
+  }
+
+  /* Estilo de los botones */
+  ion-button {
+    --background: #00bcd4; /* Botón de color turquesa */
+    --background-activated: #008ba3; /* Efecto al hacer clic */
+    --color: #ffffff; /* Color del texto */
+    --border-radius: 25px; /* Bordes redondeados */
+    padding: 12px;
+    width: 100%;
+    max-width: 350px;
+    font-size: 1.1rem;
+    margin-top: 15px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+
+    &:hover {
+      --background: #008ba3; /* Efecto hover */
+      transform: scale(1.05); /* Animación sutil de agrandamiento */
+    }
+
+    &.tertiary {
+      --background: #ffc107;
+      --background-activated: #ffb300;
+      
+      &:hover {
+        --background: #ffb300;
+      }
+    }
+  }
+
+  /* Estilo del enlace de "Recuperar contraseña" */
+  .recuperar-contrasena {
+    color: #ffffff;
+    font-size: 0.9rem;
+    margin-top: 10px;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    
+    &:hover {
+      color: #ffffff; /* Cambio de color al pasar el ratón */
+    }
   }
 }
 
-.recuperar-contrasena {
-  color: #ffffff; 
-  text-decoration: underline; 
-  font-size: 14px; 
-  cursor: pointer; 
-  transition: color 0.3s ease;
-
-  &:hover {
-    color: #00bcd4; 
-  }
-}
-
-
-ion-item {
-  --background: transparent; 
-  margin-bottom: 20px;
-}
-
-ion-input {
-  --background: #2c2c2c; 
-  border-radius: 10px; 
-  padding: 10px;
-  --color: #ffffff; 
-  font-size: 16px;
-  border: 1px solid transparent;
-  transition: border-color 0.3s ease-in-out;
-}
-
-ion-input:focus {
-  border-color: #00bcd4; 
-}
-
-ion-button {
-  --background: #00bcd4; 
-  --background-activated: #008ba3; 
-  --border-radius: 25px;
-  --color: #ffffff; 
-  margin-top: 15px;
-  padding: 8px; 
-  font-size: 16px; 
-  transition: background-color 0.3s ease-in-out;
-}
-
-ion-button:hover {
-  --background: #008ba3; 
-}
-
-ion-button.tertiary {
-  --background: #ffc107; 
-}
-
-ion-button.tertiary:hover {
-  --background: #ffb300; 
-}
-
+/* Animación de entrada (fadeIn) */
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(30px);
   }
   to {
     opacity: 1;
@@ -89,10 +104,29 @@ ion-button.tertiary:hover {
   }
 }
 
-h1 {
-  color: #ffffff; 
-}
+/* Responsividad para pantallas más pequeñas */
+@media (max-width: 768px) {
+  .contenedor {
+    padding: 30px; /* Reducir el padding en pantallas más pequeñas */
+  }
 
-p {
-  color: #ffffff; 
+  ion-icon {
+    font-size: 4rem; /* Reducir el tamaño del logo */
+  }
+
+  h1 {
+    font-size: 1.5rem; /* Ajustar el tamaño del título */
+  }
+
+  ion-input {
+    font-size: 0.95rem; /* Reducir el tamaño de los inputs */
+  }
+
+  ion-button {
+    font-size: 1rem; /* Ajustar el tamaño de los botones */
+  }
+
+  .recuperar-contrasena {
+    font-size: 0.85rem; /* Ajustar el tamaño del texto */
+  }
 }

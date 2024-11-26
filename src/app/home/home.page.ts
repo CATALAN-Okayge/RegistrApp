@@ -20,15 +20,9 @@ export class HomePage implements OnInit {
   constructor(private alertController: AlertController, private router: Router, private anim: AnimationController, private http: HttpClient, private loadingCtrl: LoadingController) {}
 
   ngOnInit() {
-    document.body.classList.add('dark-theme');
+    
 
-    this.anim.create()
-      .addElement(document.querySelector("#logo")!)
-      .duration(2000)
-      .iterations(Infinity)
-      .direction("alternate")
-      .fromTo("color", "#6FDB97", "#50CAF0")
-      .play();
+    
   }
 
   // Función para registrar usuario
