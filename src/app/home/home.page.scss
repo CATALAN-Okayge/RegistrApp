@@ -1,6 +1,5 @@
-/* Configuración general de la página */
 ion-content {
-  background-color: #121212; /* Fondo oscuro para una estética moderna */
+  background-color: #121212; 
   display: flex;
   justify-content: center;
   align-items: center;
@@ -9,35 +8,35 @@ ion-content {
 }
 
 .contenedor {
-  background-color: #1f1f1f; /* Fondo gris oscuro */
-  border-radius: 20px; /* Bordes redondeados */
+  background-color: #1f1f1f; 
+  border-radius: 20px; 
   padding: 40px;
-  max-width: 420px; /* Máxima anchura para evitar sobrecargar en pantallas grandes */
-  width: 100%; /* Ancho completo en pantallas pequeñas */
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+  max-width: 420px; 
+  width: 100%; 
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
   text-align: center;
-  animation: fadeIn 0.6s ease-out; /* Efecto de entrada */
+  animation: fadeIn 0.6s ease-out; 
   
-  /* Espaciado y estilo para los elementos dentro */
+  
   ion-icon {
-    font-size: 5rem; /* Tamaño del logo */
-    color: #00bcd4; /* Color vibrante para destacar */
+    font-size: 5rem; 
+    color: #00bcd4; 
     margin-bottom: 20px;
   }
 
   h1 {
-    font-size: 1.8rem; /* Título grande */
+    font-size: 1.8rem; 
     color: #ffffff;
     margin-bottom: 20px;
     font-weight: bold;
   }
 
-  /* Estilo para los campos de entrada */
+
   ion-input {
-    --background: #333333; /* Fondo oscuro para el input */
-    --color: #ffffff; /* Texto blanco */
-    --placeholder-color: #999999; /* Color del texto de placeholder */
-    --border-radius: 25px; /* Bordes redondeados */
+    --background: #333333; 
+    --color: #ffffff; 
+    --placeholder-color: #999999;
+    --border-radius: 25px; 
     font-size: 1rem;
     width: 100%;
     margin-bottom: 20px;
@@ -45,17 +44,17 @@ ion-content {
     transition: all 0.3s ease-in-out;
     
     &:focus {
-      --background: #2a2a2a; /* Fondo más oscuro cuando se enfoca */
-      --border-color: #00bcd4; /* Resaltado de bordes */
+      --background: #2a2a2a; 
+      --border-color: #00bcd4; 
     }
   }
 
-  /* Estilo de los botones */
+ 
   ion-button {
-    --background: #00bcd4; /* Botón de color turquesa */
-    --background-activated: #008ba3; /* Efecto al hacer clic */
-    --color: #ffffff; /* Color del texto */
-    --border-radius: 25px; /* Bordes redondeados */
+    --background: #00bcd4; 
+    --background-activated: #008ba3;
+    --color: #ffffff; 
+    --border-radius: 25px; 
     padding: 12px;
     width: 100%;
     max-width: 350px;
@@ -64,8 +63,8 @@ ion-content {
     transition: background-color 0.3s ease, transform 0.2s ease;
 
     &:hover {
-      --background: #008ba3; /* Efecto hover */
-      transform: scale(1.05); /* Animación sutil de agrandamiento */
+      --background: #008ba3; 
+      transform: scale(1.05); 
     }
 
     &.tertiary {
@@ -78,7 +77,7 @@ ion-content {
     }
   }
 
-  /* Estilo del enlace de "Recuperar contraseña" */
+  
   .recuperar-contrasena {
     color: #ffffff;
     font-size: 0.9rem;
@@ -87,12 +86,12 @@ ion-content {
     transition: color 0.3s ease;
     
     &:hover {
-      color: #ffffff; /* Cambio de color al pasar el ratón */
+      color: #ffffff; 
     }
   }
 }
 
-/* Animación de entrada (fadeIn) */
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -104,29 +103,29 @@ ion-content {
   }
 }
 
-/* Responsividad para pantallas más pequeñas */
+
 @media (max-width: 768px) {
   .contenedor {
-    padding: 30px; /* Reducir el padding en pantallas más pequeñas */
+    padding: 30px; 
   }
 
   ion-icon {
-    font-size: 4rem; /* Reducir el tamaño del logo */
+    font-size: 4rem; 
   }
 
   h1 {
-    font-size: 1.5rem; /* Ajustar el tamaño del título */
+    font-size: 1.5rem; 
   }
 
   ion-input {
-    font-size: 0.95rem; /* Reducir el tamaño de los inputs */
+    font-size: 0.95rem; 
   }
 
   ion-button {
-    font-size: 1rem; /* Ajustar el tamaño de los botones */
+    font-size: 1rem; 
   }
 
   .recuperar-contrasena {
-    font-size: 0.85rem; /* Ajustar el tamaño del texto */
+    font-size: 0.85rem; 
   }
 }
