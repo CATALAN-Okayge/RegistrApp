@@ -25,6 +25,7 @@ export class InicioPage implements OnInit {
   async escanearQR() {
     try {
       await BarcodeScanner.checkPermission({ force: true });
+      BarcodeScanner.hideBackground(); // Oculta el fondo de la app
 
       const result = await BarcodeScanner.startScan();
 
