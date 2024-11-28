@@ -24,39 +24,60 @@ export class InicioPage implements OnInit {
 
   async escanearQR() {
     try {
-      await BarcodeScanner.checkPermission({ force: true });
-      BarcodeScanner.hideBackground(); // Oculta el fondo de la app
+      const status = await BarcodeScanner.checkPermission({ force: true });
+      if (!status.granted) {
+        console.error('Permiso denegado para usar la cámara.');
+        await this.mostrarToast('Permiso denegado para la cámara.');
+        return;
+      }
+  
+      
+      const ionContent = document.querySelector('ion-content');
+      if (ionContent) {
+        ionContent.style.setProperty('--ion-background-color', 'transparent');
+      }
 
+  
+      
+      await BarcodeScanner.hideBackground();
+  
+      
       const result = await BarcodeScanner.startScan();
-
+  
       if (result.hasContent) {
         const codigoQR = result.content;
         this.registrarAsistencia(codigoQR);
-
-      
-        this.mostrarMensajeExito();
+        this.mostrarToast('Escaneo exitoso');
       } else {
         console.log('No se escaneó ningún código.');
       }
     } catch (error) {
       console.error('Error al escanear QR:', error);
+      await this.mostrarToast('Error al escanear QR.');
+    } finally {
+      
+      const ionContent = document.querySelector('ion-content');
+      ionContent?.classList.remove('qr-active');
+  
+      await BarcodeScanner.showBackground();
+      await BarcodeScanner.stopScan();
     }
   }
 
-
-  async mostrarMensajeExito() {
+  async mostrarToast(message: string) {
     const toast = await this.toastController.create({
-      message: 'Escaneo exitoso',
+      message,
       buttons: [
         {
           text: 'OK',
-          role: 'cancel' 
-        }
+          role: 'cancel', 
+        },
       ],
-      position: 'bottom' 
+      position: 'bottom',
     });
     await toast.present();
   }
+
 
   registrarAsistencia(qrData: string) {
     const nombreUsuario = localStorage.getItem('nombreUsuario') || 'Desconocido'; 
