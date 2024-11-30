@@ -10,6 +10,7 @@ import { ToastController } from '@ionic/angular';
 export class InicioPage implements OnInit {
   qrCodeImage: string | null = null;
   icono = 'oscuro'; 
+  escaneoActivo = false;
 
   constructor(private toastController: ToastController) {}
 
@@ -30,6 +31,8 @@ export class InicioPage implements OnInit {
         await this.mostrarToast('Permiso denegado para la cámara.');
         return;
       }
+
+      this.escaneoActivo = true;
   
       
       const ionContent = document.querySelector('ion-content');
@@ -40,6 +43,7 @@ export class InicioPage implements OnInit {
   
       
       await BarcodeScanner.hideBackground();
+      document.querySelector('body')!.classList.add('scanner-active');
   
       
       const result = await BarcodeScanner.startScan();
@@ -56,12 +60,19 @@ export class InicioPage implements OnInit {
       await this.mostrarToast('Error al escanear QR.');
     } finally {
       
-      const ionContent = document.querySelector('ion-content');
-      ionContent?.classList.remove('qr-active');
-  
-      await BarcodeScanner.showBackground();
-      await BarcodeScanner.stopScan();
+      this.detenerEscaneo();
     }
+  }
+
+  async detenerEscaneo() {
+    // Restablecer los estilos y detener el escaneo
+    this.escaneoActivo = false;
+    document.body.classList.remove('scanner-active');
+    const ionContent = document.querySelector('ion-content');
+    ionContent?.classList.remove('qr-active');
+
+    await BarcodeScanner.showBackground();
+    await BarcodeScanner.stopScan();
   }
 
   async mostrarToast(message: string) {

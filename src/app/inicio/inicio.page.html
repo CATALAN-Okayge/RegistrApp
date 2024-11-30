@@ -31,9 +31,16 @@
       </ion-card-content>
     </ion-card>
   </div>
+  <div class="escanear-qr-container-detener">
+    <ion-button expand="block" color="tertiary" (click)="escanearQR()" *ngIf="!escaneoActivo">
+      Escanear QR
+    </ion-button>
+    <ion-button expand="block" color="danger" (click)="detenerEscaneo()" *ngIf="escaneoActivo">
+      Detener Escaneo
+    </ion-button>
+  </div>
+  
 
   
-  <div class="escanear-qr-container">
-    <ion-button expand="block" color="tertiary" (click)="escanearQR()">Escanear QR</ion-button>
-  </div>
+  
 </ion-content>

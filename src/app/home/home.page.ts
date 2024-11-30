@@ -16,6 +16,7 @@ export class HomePage implements OnInit {
   nombreUsuario: string = ''; 
   contrasena: string = '';    
   email: string = ''; 
+  rol: string = '';
 
   constructor(private alertController: AlertController, private router: Router, private anim: AnimationController, private http: HttpClient, private loadingCtrl: LoadingController) {}
 

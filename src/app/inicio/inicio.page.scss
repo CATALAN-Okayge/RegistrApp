@@ -25,6 +25,8 @@ ion-content{
 
   body {
     background-color: transparent !important;
+    --background: transparent;
+    --ion-background-color: transparent;
   }
 
   .inicio-background {
@@ -45,6 +47,11 @@ ion-content{
     left: 0;
     right: 0;
     padding: 0 50px;
+    
+  }
+
+  .escanear-qr-container {
+    display: none;
   }
 
   .inicio-card {
