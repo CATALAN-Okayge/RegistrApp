@@ -16,7 +16,19 @@
       <p><strong>Email:</strong> {{ email }}</p>
     </div>
 
-    <div class="perfil-historial">
+    <div *ngIf="rol === 'profesor'">
+      <!-- Vista de profesor -->
+      <h2>generar aqui tu código QR.</h2>
+      <ion-button expand="block" color="secondary" (click)="generarQR()">Generar QR</ion-button>
+
+      <!-- Mostrar el código QR generado -->
+      <div *ngIf="qrCodeImage">
+        <h3>QR Generado:</h3>
+        <img [src]="qrCodeImage" alt="QR Code" />
+      </div>
+    </div>
+
+    <div *ngIf="rol === 'estudiante'" class="perfil-historial">
       <h3>Historial de Registro de Asistencia</h3>
       <ion-list>
         <ion-item *ngFor="let registro of historialAsistencias">

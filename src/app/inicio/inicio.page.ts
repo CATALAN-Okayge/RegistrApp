@@ -11,17 +11,22 @@ export class InicioPage implements OnInit {
   qrCodeImage: string | null = null;
   icono = 'oscuro'; 
   escaneoActivo = false;
+  rol: string = '';
+  nombreUsuario: string = ''; 
+  escaneando: boolean = false;
 
   constructor(private toastController: ToastController) {}
 
   ngOnInit() {
-    
+    this.obtenerDatosUsuario();
   }
 
-  generarQR() {
-    const qrData = `Asistencia-${new Date().getTime()}`;
-    this.qrCodeImage = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(qrData)}`;
+  obtenerDatosUsuario() {
+    this.nombreUsuario = localStorage.getItem('nombreUsuario') || 'Usuario';
+    this.rol = localStorage.getItem('rol') || ''; 
   }
+
+ 
 
   async escanearQR() {
     try {

@@ -4,7 +4,11 @@ ion-content{
 
   &.qr-active {
     --background: transparent; 
-    backdrop-filter: blur(10px); 
+    backdrop-filter: none; 
+  }
+
+  .background-transparent {
+    --background: transparent; 
   }
 
   ion-header {
@@ -35,11 +39,21 @@ ion-content{
 
   .inicio-container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 80%; 
     text-align: center;
+    padding: 16px;
+    transition: opacity 0.3s ease;
   }
+
+
+  .qr-active .inicio-container {
+    opacity: 0; 
+    pointer-events: none; 
+  }
+
 
   .escanear-qr-container {
     position: absolute;
@@ -47,37 +61,40 @@ ion-content{
     left: 0;
     right: 0;
     padding: 0 50px;
+    z-index: 10
     
   }
 
-  .escanear-qr-container {
-    display: none;
+  .escanear-qr-container * {
+    z-index: 10; 
   }
 
-  .inicio-card {
-    width: 90%;
-    max-width: 400px;
-    background-color: #1c1c1c; 
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    animation: fadeIn 1s ease-out; 
+  .mensaje-bienvenida {
+    margin-bottom: 20px;
   }
 
-  .qr-button {
-    --background: #007bff; 
-    --background-hover: #0056b3; 
-    --border-radius: 8px;
-    margin-top: 10px;
-    animation: pulse 1.5s infinite; 
+  .imagen-ahri {
+    position: static;
+    margin: 20px 0;
+    transition: opacity 0.3s ease;
   }
 
-  .qr-image {
-    display: block;
-    margin: 20px auto; 
-    width: 200px;
-    height: auto;
+  .imagen-ahri img{
+    width: 50%;
+    max-width: 300px;
     border-radius: 8px;
   }
 
+  .qr-active .imagen-ahri {
+    opacity: 0; /* También oculta la imagen */
+  }
+
+  .mensaje-bienvenida .azul {
+    color: #007bff; /* Azul para resaltar las palabras */
+    font-weight: bold; /* Opcional: Para enfatizar las palabras */
+  }
+
+  
   @keyframes fadeIn {
     from {
       opacity: 0;

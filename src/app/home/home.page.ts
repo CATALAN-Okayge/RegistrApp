@@ -27,34 +27,63 @@ export class HomePage implements OnInit {
   }
 
   // Función para registrar usuario
-  registrarUsuario() {
-    if (this.nombreUsuario && this.contrasena) {
-      localStorage.setItem('nombreUsuario', this.nombreUsuario);
-      localStorage.setItem('contrasena', this.contrasena);
-      
-      if (this.email) {
-        localStorage.setItem('email', this.email); // Guardar el email opcional
-      }
-  
-      this.mostrarAlerta('Registro Exitoso', 'Te has registrado correctamente.');
-    } else {
-      this.mostrarAlerta('Error', 'Por favor, completa todos los campos.');
+  async registrarUsuario() {
+    // Verificar si todos los campos están completos
+    if (!this.nombreUsuario || !this.email || !this.contrasena) {
+      await this.mostrarAlerta('Error', 'Por favor, completa todos los campos');
+      return;
     }
+
+    // Asignar rol basado en el correo electrónico
+    if (this.email.endsWith('@profduocuc.cl')) {
+      this.rol = 'profesor';
+    } else {
+      this.rol = 'estudiante';
+    }
+
+    // Guardar datos en localStorage
+    localStorage.setItem('nombreUsuario', this.nombreUsuario);
+    localStorage.setItem('email', this.email);
+    localStorage.setItem('contrasena', this.contrasena);
+    localStorage.setItem('rol', this.rol);
+
+    // Redirigir al perfil del usuario
+    await this.mostrarAlerta('Registro Exitoso', 'Usuario registrado correctamente');
+    this.router.navigate(['/inicio']);
   }
 
   // Función para iniciar sesión
-  iniciarSesion() {
+  async iniciarSesion() {
+    // Obtener datos guardados en localStorage
     const storedUsername = localStorage.getItem('nombreUsuario');
     const storedPassword = localStorage.getItem('contrasena');
+    const storedEmail = localStorage.getItem('email');
+    const storedRol = localStorage.getItem('rol');
 
-    if (this.nombreUsuario === storedUsername && this.contrasena === storedPassword) {
-      this.mostrarAlerta('Inicio de Sesión', 'Has iniciado sesión correctamente.').then(() => {
-        this.router.navigate(['/inicio']);
-      });
+    // Validación de campos obligatorios
+    if (!this.nombreUsuario || !this.contrasena || !this.email) {
+      await this.mostrarAlerta('Error', 'Por favor, completa todos los campos.');
+      return;
+    }
+
+    // Verificar si las credenciales coinciden
+    if (this.nombreUsuario === storedUsername && this.contrasena === storedPassword && this.email === storedEmail) {
+      // Guardar rol en localStorage si es correcto
+      localStorage.setItem('rol', storedRol!);
+
+      // Redirigir según el rol
+      if (storedRol === 'profesor') {
+        await this.mostrarAlerta('Bienvenido', 'Bienvenido Profesor.');
+        this.router.navigate(['/inicio']); // Redirigir a perfil del profesor
+      } else {
+        await this.mostrarAlerta('Bienvenido', 'Bienvenido Estudiante.');
+        this.router.navigate(['/inicio']); // Redirigir a perfil del estudiante
+      }
     } else {
-      this.mostrarAlerta('Error', 'Nombre de usuario o contraseña incorrectos.');
+      await this.mostrarAlerta('Error', 'Nombre de usuario, contraseña o email incorrectos.');
     }
   }
+  
 
   // Método para mostrar alertas
   async mostrarAlerta(header: string, message: string) {

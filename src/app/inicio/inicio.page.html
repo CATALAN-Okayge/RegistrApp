@@ -14,32 +14,37 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="inicio-background">
-  <div class="inicio-container">
-    <ion-card class="inicio-card">
-      <ion-card-header>
-        <ion-text color="primary">
-          <h2>Generar Asistencia</h2>
-        </ion-text>
-      </ion-card-header>
-      <ion-card-content>
-        <p class="description">
-          Haz clic en el botón para generar un código QR.
+<ion-content [ngClass]="{ 'qr-active': escaneoActivo }">
+  <div class="inicio-container" *ngIf="!escaneoActivo">
+      <!-- Mensaje de bienvenida dinámico -->
+      <div class="mensaje-bienvenida">
+        <h2>
+          Bienvenido {{ rol === 'profesor' ? 'Profesor' : 'Estudiante' }} 
+        <span class="azul">{{ nombreUsuario }}</span>
+        </h2>
+        <p *ngIf="rol === 'profesor'">
+          Vaya hacia su perfil (arriba a la derecha) para 
+          <span class="azul">generar el código QR</span> para su clase.
         </p>
-        <ion-button expand="block" color="secondary" (click)="generarQR()">Generar Código QR</ion-button>
-        <ion-img [src]="qrCodeImage" *ngIf="qrCodeImage" class="qr-image"></ion-img>
-      </ion-card-content>
-    </ion-card>
+        <p *ngIf="rol === 'estudiante'">
+          Presione el botón 
+        <span class="azul">"Escanear QR"</span> para registrar su asistencia a la clase.
+        </p>
+      </div>
+      
+    <div class="imagen-ahri">
+      <img src="/assets/ahri_registrapp.png" alt="Clase" />
+    </div>
+
+    <div class="escanear-qr-container">
+      <ion-button expand="block" color="tertiary" (click)="escanearQR()" *ngIf="!escaneoActivo">
+        Escanear QR
+      </ion-button>
+      <ion-button expand="block" color="danger" (click)="detenerEscaneo()" *ngIf="escaneoActivo">
+        Detener Escaneo
+      </ion-button>
+    </div>
   </div>
-  <div class="escanear-qr-container-detener">
-    <ion-button expand="block" color="tertiary" (click)="escanearQR()" *ngIf="!escaneoActivo">
-      Escanear QR
-    </ion-button>
-    <ion-button expand="block" color="danger" (click)="detenerEscaneo()" *ngIf="escaneoActivo">
-      Detener Escaneo
-    </ion-button>
-  </div>
-  
 
   
   
