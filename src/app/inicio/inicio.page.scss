@@ -47,6 +47,11 @@ ion-content{
     padding: 16px;
     transition: opacity 0.3s ease;
   }
+  
+  .hidden {
+    display: none !important;
+  }
+  
 
 
   .qr-active .inicio-container {

@@ -37,10 +37,10 @@
     </div>
 
     <div class="escanear-qr-container">
-      <ion-button expand="block" color="tertiary" (click)="escanearQR()" *ngIf="!escaneoActivo">
+      <ion-button expand="block" color="tertiary" (click)="escanearQR()"  [ngClass]="{'hidden': escaneoActivo}">
         Escanear QR
       </ion-button>
-      <ion-button expand="block" color="danger" (click)="detenerEscaneo()" *ngIf="escaneoActivo">
+      <ion-button expand="block" color="danger" (click)="detenerEscaneo()" [ngClass]="{'hidden': !escaneoActivo}">
         Detener Escaneo
       </ion-button>
     </div>
