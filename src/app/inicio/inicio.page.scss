@@ -1,105 +1,72 @@
-ion-content{
+ion-content {
   --background: var(--ion-background-color, #1c1c1c); 
   position: relative;
 
+  // Estilo general del contenido
   &.qr-active {
-    --background: transparent; 
+    --background: transparent;
     backdrop-filter: none; 
   }
 
-  .background-transparent {
-    --background: transparent; 
-  }
-
-  ion-header {
-    ion-toolbar {
-      --padding-start: 0; 
-      --padding-end: 0; 
-      display: flex;
-      justify-content: space-between; 
-      align-items: center; 
-    }
-
-    ion-title {
-      text-align: center; 
-      flex: 1; 
-    }
-  }
-
-
-  body {
-    background-color: transparent !important;
-    --background: transparent;
-    --ion-background-color: transparent;
-  }
-
-  .inicio-background {
-    background-color: #1c1c1c; 
-  }
-
-  .inicio-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 80%; 
+  // Contenedor del mensaje de bienvenida
+  .mensaje-bienvenida-container {
     text-align: center;
-    padding: 16px;
+    margin: 20px;
     transition: opacity 0.3s ease;
   }
-  
-  .hidden {
-    display: none !important;
+
+  .mensaje-bienvenida {
+    margin-bottom: 20px;
+    h2 {
+      font-size: 1.5rem;
+      color: #ffffff;
+    }
+    p {
+      font-size: 1rem;
+      color: #d1d1d1;
+    }
   }
-  
 
-
-  .qr-active .inicio-container {
-    opacity: 0; 
-    pointer-events: none; 
+  // Texto destacado en azul
+  .azul {
+    color: #007bff; 
+    font-weight: bold;
   }
 
+  // Estilo para la imagen de bienvenida
+  .imagen-ahri {
+    margin: 20px 0;
+    transition: opacity 0.3s ease;
 
+    img {
+      width: 50%;
+      max-width: 300px;
+      border-radius: 8px;
+    }
+  }
+
+  // Contenedor de los botones de escaneo QR
   .escanear-qr-container {
     position: absolute;
     bottom: 20px;
     left: 0;
     right: 0;
     padding: 0 50px;
-    z-index: 10
-    
+    z-index: 10;
+
+    ion-button {
+      --border-radius: 8px;
+      --box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+      font-size: 1rem;
+    }
   }
 
-  .escanear-qr-container * {
-    z-index: 10; 
+  // Clases utilitarias para ocultar contenido (por ejemplo, usando ngClass)
+  .hidden {
+    display: none !important;
   }
 
-  .mensaje-bienvenida {
-    margin-bottom: 20px;
-  }
-
-  .imagen-ahri {
-    position: static;
-    margin: 20px 0;
-    transition: opacity 0.3s ease;
-  }
-
-  .imagen-ahri img{
-    width: 50%;
-    max-width: 300px;
-    border-radius: 8px;
-  }
-
-  .qr-active .imagen-ahri {
-    opacity: 0; /* También oculta la imagen */
-  }
-
-  .mensaje-bienvenida .azul {
-    color: #007bff; /* Azul para resaltar las palabras */
-    font-weight: bold; /* Opcional: Para enfatizar las palabras */
-  }
-
-  
+  // Animaciones (opcionales)
   @keyframes fadeIn {
     from {
       opacity: 0;
@@ -108,7 +75,6 @@ ion-content{
       opacity: 1;
     }
   }
-
 
   @keyframes pulse {
     0% {
@@ -125,17 +91,16 @@ ion-content{
     }
   }
 
-
   ion-icon {
     font-size: 1.5rem;
     color: var(--icono);
   }
 
   ion-toolbar ion-button {
-    --color: #ffffff; 
+    --color: #ffffff;
   }
 
   ion-toolbar ion-icon {
-    font-size: 24px; 
+    font-size: 24px;
   }
 }

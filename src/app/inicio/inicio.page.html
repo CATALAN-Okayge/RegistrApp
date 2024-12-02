@@ -14,38 +14,39 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [ngClass]="{ 'qr-active': escaneoActivo }">
-  <div class="inicio-container" *ngIf="!escaneoActivo">
-      <!-- Mensaje de bienvenida dinámico -->
-      <div class="mensaje-bienvenida">
-        <h2>
-          Bienvenido {{ rol === 'profesor' ? 'Profesor' : 'Estudiante' }} 
+<ion-content>
+  <!-- Contenedor para el mensaje de bienvenida -->
+  <div class="mensaje-bienvenida-container" *ngIf="!escaneoActivo">
+    <div class="mensaje-bienvenida">
+      <h2>
+        Bienvenido {{ rol === 'profesor' ? 'Profesor' : 'Estudiante' }}
         <span class="azul">{{ nombreUsuario }}</span>
-        </h2>
-        <p *ngIf="rol === 'profesor'">
-          Vaya hacia su perfil (arriba a la derecha) para 
-          <span class="azul">generar el código QR</span> para su clase.
-        </p>
-        <p *ngIf="rol === 'estudiante'">
-          Presione el botón 
-        <span class="azul">"Escanear QR"</span> para registrar su asistencia a la clase.
-        </p>
-      </div>
-      
+      </h2>
+      <p *ngIf="rol === 'profesor'">
+        Vaya hacia su perfil (arriba a la derecha) para 
+        <span class="azul">generar el código QR</span> para su clase.
+      </p>
+      <p *ngIf="rol === 'estudiante'">
+        Presione el botón <span class="azul">"Escanear QR"</span> para registrar su asistencia.
+      </p>
+    </div>
+
     <div class="imagen-ahri">
       <img src="/assets/ahri_registrapp.png" alt="Clase" />
     </div>
-
-    <div class="escanear-qr-container">
-      <ion-button expand="block" color="tertiary" (click)="escanearQR()"  [ngClass]="{'hidden': escaneoActivo}">
-        Escanear QR
-      </ion-button>
-      <ion-button expand="block" color="danger" (click)="detenerEscaneo()" [ngClass]="{'hidden': !escaneoActivo}">
-        Detener Escaneo
-      </ion-button>
-    </div>
   </div>
 
-  
-  
+  <!-- Contenedor para los botones de escaneo QR -->
+  <div class="escanear-qr-container">
+    <ion-button 
+      expand="block" color="tertiary"  (click)="escanearQR()" *ngIf="!escaneoActivo">
+      Escanear QR
+    </ion-button>
+
+    <ion-button 
+      expand="block" color="danger" (click)="detenerEscaneo()" *ngIf="escaneoActivo">
+      Detener Escaneo
+    </ion-button>
+  </div>
 </ion-content>
+

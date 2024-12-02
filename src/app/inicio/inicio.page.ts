@@ -13,7 +13,8 @@ export class InicioPage implements OnInit {
   escaneoActivo = false;
   rol: string = '';
   nombreUsuario: string = ''; 
-  escaneando: boolean = false;
+  mostrarMensaje = true;
+
 
   constructor(private toastController: ToastController) {}
 
@@ -38,6 +39,7 @@ export class InicioPage implements OnInit {
       }
 
       this.escaneoActivo = true;
+      this.mostrarMensaje = false;
   
       
       const ionContent = document.querySelector('ion-content');
@@ -72,6 +74,7 @@ export class InicioPage implements OnInit {
   async detenerEscaneo() {
     // Restablecer los estilos y detener el escaneo
     this.escaneoActivo = false;
+    this.mostrarMensaje = true;
     document.body.classList.remove('scanner-active');
     const ionContent = document.querySelector('ion-content');
     ionContent?.classList.remove('qr-active');
