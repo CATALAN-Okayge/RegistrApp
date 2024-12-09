@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { AnimationController } from '@ionic/angular';
-import { AlertController} from '@ionic/angular'; 
+import { Component, OnInit,ViewChild } from '@angular/core';
+import { AnimationController, PopoverController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { LoadingController } from '@ionic/angular';
 
 @Component({
@@ -11,81 +11,123 @@ import { LoadingController } from '@ionic/angular';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
+  usuarios: any[] = [];
+  usuarioActual: any = null;
 
-  icono = 'night_mode'; 
-  nombreUsuario: string = ''; 
-  contrasena: string = '';    
-  email: string = ''; 
+  icono = 'night_mode';
+  nombreUsuario: string = '';
+  contrasena: string = '';
+  email: string = '';
   rol: string = '';
+  tooltipMensaje: string = '';
 
-  constructor(private alertController: AlertController, private router: Router, private anim: AnimationController, private http: HttpClient, private loadingCtrl: LoadingController) {}
+
+  @ViewChild('popover') popover: any;
+
+  constructor(
+    private alertController: AlertController,
+    private router: Router,
+    private anim: AnimationController,
+    private http: HttpClient,
+    private loadingCtrl: LoadingController,
+    private popoverCtrl: PopoverController
+  ) {}
 
   ngOnInit() {
-    
-
-    
+    this.cargarUsuarios(); // Cargar usuarios del LocalStorage
+    this.usuarioActual = this.obtenerUsuarioActual(); // Cargar usuario actual
   }
 
-  // Función para registrar usuario
+  // Cargar usuarios desde LocalStorage
+  cargarUsuarios() {
+    const usuariosGuardados = JSON.parse(localStorage.getItem('usuarios') || '[]');
+    this.usuarios = usuariosGuardados;
+  }
+
+  // Guardar un nuevo usuario
   async registrarUsuario() {
-    // Verificar si todos los campos están completos
     if (!this.nombreUsuario || !this.email || !this.contrasena) {
-      await this.mostrarAlerta('Error', 'Por favor, completa todos los campos');
+      await this.mostrarAlerta('Error', 'Por favor, completa todos los campos.');
       return;
     }
 
-    // Asignar rol basado en el correo electrónico
+    // Verificar si el usuario ya existe
+    const usuarioExiste = this.usuarios.some((u) => u.email === this.email);
+    if (usuarioExiste) {
+      await this.mostrarAlerta('Error', 'El usuario ya está registrado.');
+      return;
+    }
+
+    
     if (this.email.endsWith('@profduocuc.cl')) {
       this.rol = 'profesor';
     } else {
       this.rol = 'estudiante';
     }
 
-    // Guardar datos en localStorage
-    localStorage.setItem('nombreUsuario', this.nombreUsuario);
-    localStorage.setItem('email', this.email);
-    localStorage.setItem('contrasena', this.contrasena);
-    localStorage.setItem('rol', this.rol);
+    // Crear el nuevo usuario
+    const nuevoUsuario = {
+      nombreUsuario: this.nombreUsuario,
+      email: this.email,
+      contrasena: this.contrasena,
+      rol: this.rol,
+    };
 
-    // Redirigir al perfil del usuario
-    await this.mostrarAlerta('Registro Exitoso', 'Usuario registrado correctamente');
-    this.router.navigate(['/inicio']);
+    // Guardar el usuario en el array y en LocalStorage
+    this.usuarios.push(nuevoUsuario);
+    localStorage.setItem('usuarios', JSON.stringify(this.usuarios));
+
+    await this.mostrarAlerta('Registro Exitoso', 'Usuario registrado correctamente.');
+    this.nombreUsuario = '';
+    this.email = '';
+    this.contrasena = '';
   }
 
-  // Función para iniciar sesión
+  
   async iniciarSesion() {
-    // Obtener datos guardados en localStorage
-    const storedUsername = localStorage.getItem('nombreUsuario');
-    const storedPassword = localStorage.getItem('contrasena');
-    const storedEmail = localStorage.getItem('email');
-    const storedRol = localStorage.getItem('rol');
-
-    // Validación de campos obligatorios
     if (!this.nombreUsuario || !this.contrasena || !this.email) {
       await this.mostrarAlerta('Error', 'Por favor, completa todos los campos.');
       return;
     }
 
-    // Verificar si las credenciales coinciden
-    if (this.nombreUsuario === storedUsername && this.contrasena === storedPassword && this.email === storedEmail) {
-      // Guardar rol en localStorage si es correcto
-      localStorage.setItem('rol', storedRol!);
+    // Buscar el usuario en la lista de usuarios
+    const usuario = this.usuarios.find(
+      (u) =>
+        u.nombreUsuario === this.nombreUsuario &&
+        u.contrasena === this.contrasena &&
+        u.email === this.email
+    );
 
-      // Redirigir según el rol
-      if (storedRol === 'profesor') {
+    if (usuario) {
+      this.usuarioActual = usuario;
+      localStorage.setItem('usuarioActual', JSON.stringify(usuario));
+
+    
+      if (usuario.rol === 'profesor') {
         await this.mostrarAlerta('Bienvenido', 'Bienvenido Profesor.');
-        this.router.navigate(['/inicio']); // Redirigir a perfil del profesor
+        this.router.navigate(['/inicio']); 
       } else {
         await this.mostrarAlerta('Bienvenido', 'Bienvenido Estudiante.');
-        this.router.navigate(['/inicio']); // Redirigir a perfil del estudiante
+        this.router.navigate(['/inicio']); 
       }
     } else {
-      await this.mostrarAlerta('Error', 'Nombre de usuario, contraseña o email incorrectos.');
+      await this.mostrarAlerta('Error', 'Credenciales incorrectas.');
     }
   }
-  
 
-  // Método para mostrar alertas
+ 
+  cerrarSesion() {
+    this.usuarioActual = null;
+    localStorage.removeItem('usuarioActual');
+    this.router.navigate(['/home']);
+  }
+
+ 
+  obtenerUsuarioActual() {
+    return JSON.parse(localStorage.getItem('usuarioActual') || 'null');
+  }
+
+ 
   async mostrarAlerta(header: string, message: string) {
     const alert = await this.alertController.create({
       header: header,
@@ -96,48 +138,64 @@ export class HomePage implements OnInit {
     await alert.present();
   }
 
-  // Función para recuperar contraseña
+  
   recuperarContrasena() {
-    const apiUrl = 'https://myths.cl/api/reset_password.php'; 
-    const storedUsername = localStorage.getItem('nombreUsuario');
-    const storedEmail = this.email; 
-
+    const apiUrl = 'https://myths.cl/api/reset_password.php';
     const data = {
-      nombre: storedUsername, 
-      app: 'RegistrApp', 
-      clave: this.contrasena, 
-      email: storedEmail 
+      nombre: this.nombreUsuario,
+      app: 'RegistrApp',
+      clave: this.contrasena,
+      email: this.email,
     };
 
     this.http.post(apiUrl, data).subscribe(
-      (response: any) => { 
-        if (response.success) { 
-          this.mostrarAlerta('Éxito', response.message || 'Se ha enviado un correo para recuperar la contraseña.');
+      (response: any) => {
+        if (response.success) {
+          this.mostrarAlerta(
+            'Éxito',
+            response.message || 'Se ha enviado un correo para recuperar la contraseña.'
+          );
         } else {
-          this.mostrarAlerta('Error', response.message || 'Hubo un problema al intentar recuperar la contraseña.');
+          this.mostrarAlerta(
+            'Error',
+            response.message || 'Hubo un problema al intentar recuperar la contraseña.'
+          );
         }
       },
       (error) => {
-        this.mostrarAlerta('Error', 'Hubo un problema al intentar recuperar la contraseña. Por favor, inténtalo de nuevo.');
+        this.mostrarAlerta(
+          'Error',
+          'Hubo un problema al intentar recuperar la contraseña. Por favor, inténtalo de nuevo.'
+        );
       }
     );
   }
 
-  // Función para animar errores en campos
+  async mostrarTooltip(event: any, mensaje: string) {
+    this.tooltipMensaje = mensaje;
+    const popover = await this.popoverCtrl.create({
+      event,
+      component: 'ion-popover',
+      componentProps: { message: mensaje },
+      translucent: true,
+    });
+    await popover.present();
+  }
+
+
   animarError(index: number) {
-    this.anim.create()
-      .addElement(document.querySelectorAll("input")[index]!)
+    this.anim
+      .create()
+      .addElement(document.querySelectorAll('input')[index]!)
       .duration(100)
       .iterations(3)
       .keyframes([
-        { offset: 0, transform: "translateX(0px)", border: "1px transparent solid" },
-        { offset: 0.25, transform: "translateX(-5px)", border: "1px red solid" },
-        { offset: 0.5, transform: "translateX(0px)", border: "1px transparent solid" },
-        { offset: 0.75, transform: "translateX(5px)", border: "1px red solid" },
-        { offset: 1, transform: "translateX(0px)", border: "1px transparent solid" },
+        { offset: 0, transform: 'translateX(0px)', border: '1px transparent solid' },
+        { offset: 0.25, transform: 'translateX(-5px)', border: '1px red solid' },
+        { offset: 0.5, transform: 'translateX(0px)', border: '1px transparent solid' },
+        { offset: 0.75, transform: 'translateX(5px)', border: '1px red solid' },
+        { offset: 1, transform: 'translateX(0px)', border: '1px transparent solid' },
       ])
       .play();
   }
 }
-
-

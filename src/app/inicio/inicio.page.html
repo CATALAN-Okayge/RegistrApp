@@ -1,9 +1,7 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-button routerLink="/home">
-        <ion-icon src="assets/logo_login.svg" slot="icon-only"></ion-icon>
-      </ion-button>
+      
     </ion-buttons>
     <ion-title>Inicio</ion-title>
     <ion-buttons slot="end">
@@ -32,14 +30,14 @@
     </div>
 
     <div class="imagen-ahri">
-      <img src="/assets/ahri_registrapp.png" alt="Clase" />
+      <img src="/assets/jinx_catalan.png" alt="Clase" />
     </div>
   </div>
 
   <!-- Contenedor para los botones de escaneo QR -->
   <div class="escanear-qr-container">
     <ion-button 
-      expand="block" color="tertiary"  (click)="escanearQR()" *ngIf="!escaneoActivo">
+      expand="block" color="tertiary" (click)="escanearQR()" *ngIf="!escaneoActivo">
       Escanear QR
     </ion-button>
 
@@ -49,4 +47,3 @@
     </ion-button>
   </div>
 </ion-content>
-

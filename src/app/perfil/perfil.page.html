@@ -6,6 +6,11 @@
       </ion-button>
     </ion-buttons>
     <ion-title>Perfil</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cerrarSesion()">
+        <ion-icon name="log-out-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -17,11 +22,11 @@
     </div>
 
     <div *ngIf="rol === 'profesor'">
-      <!-- Vista de profesor -->
+      
       <h2>generar aqui tu código QR.</h2>
       <ion-button expand="block" color="secondary" (click)="generarQR()">Generar QR</ion-button>
 
-      <!-- Mostrar el código QR generado -->
+      
       <div *ngIf="qrCodeImage">
         <h3>QR Generado:</h3>
         <img [src]="qrCodeImage" alt="QR Code" />
