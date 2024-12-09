@@ -7,7 +7,7 @@
     </ion-buttons>
     <ion-title>Perfil</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="cerrarSesion()">
+      <ion-button (click)="cerrarSesion()" color="danger">
         <ion-icon name="log-out-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -16,6 +16,11 @@
 
 <ion-content>
   <div class="perfil-container">
+    <img [src]="fotoPerfil" alt="Foto de Perfil" class="foto-perfil" />
+    <ion-button expand="block" color="secondary" (click)="seleccionarArchivo()">
+      Cambiar Foto
+    </ion-button>
+    <input  type="file" accept="image/*" #fileInput (change)="cambiarFotoPerfil($event)" style="display: none;" />
     <div class="perfil-info">
       <h2>{{ nombreUsuario }}</h2>
       <p><strong>Email:</strong> {{ email }}</p>

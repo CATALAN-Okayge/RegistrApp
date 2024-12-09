@@ -1,5 +1,6 @@
-ion-content{
+ion-content {
   --background: #1c1c1c00;
+
   .perfil-container {
     padding: 20px;
     display: flex;
@@ -7,8 +8,6 @@ ion-content{
     align-items: center;
     justify-content: center;
   }
-
-  
 
   .perfil-info {
     background: #2c2c2c;
@@ -36,6 +35,43 @@ ion-content{
       color: #00bcd4;
       font-size: 18px;
       margin: 5px 0;
+    }
+  }
+
+  .foto-perfil {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+    }
+  }
+
+  input[type="file"] {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #00bcd4;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+
+    &:hover {
+      background-color: #008ba3;
+      transform: scale(1.03);
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 4px #00bcd4;
     }
   }
 
